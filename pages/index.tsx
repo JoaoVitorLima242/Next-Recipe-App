@@ -1,8 +1,15 @@
 import type { GetStaticProps } from 'next'
 import styles from '../styles/Home.module.css'
 import Head from "next/head"
+import { Recipe } from "../types/recipes"
 
-const Home = () => {
+type HomeProps = {
+  recipes: Recipe[]
+}
+
+const Home = ({ recipes }: HomeProps) => {
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +20,7 @@ const Home = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Hello World!
+          {recipes[0].title}!
         </h1>
       </main>
     </div>
@@ -24,9 +31,7 @@ const Home = () => {
 export const getStaticProps : GetStaticProps = async () => {
   return {
     props: {
-      data: {
-
-      }
+      recipes: [{title: "tega"}]
     }
   }
 }
