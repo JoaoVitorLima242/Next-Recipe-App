@@ -5,10 +5,10 @@ import Link from 'next/link'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <nav>
+      <nav className="header">
         <div>
-          <Link href="/">
-            <a>Kap's Kitchen</a>
+          <Link href='/'>
+            <a>Kap's Kitchen 🍳</a>
           </Link>
         </div>
       </nav>

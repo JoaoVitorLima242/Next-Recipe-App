@@ -1,7 +1,11 @@
 import type { GetStaticProps } from 'next'
 import styles from '../styles/Home.module.css'
 import Head from "next/head"
-import { Recipe } from "../types/recipes"
+import {sanityClient, urlFor} from "../lib/sanity";
+
+type Recipe = {
+  title: string
+}
 
 type HomeProps = {
   recipes: Recipe[]
