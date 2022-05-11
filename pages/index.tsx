@@ -11,6 +11,13 @@ type HomeProps = {
   recipes: Recipe[]
 }
 
+const recipesQuery: string = `*[_type == "recipe"]{
+  _id,
+  name,
+  slug,
+  mainImage
+}`;
+
 const Home = ({ recipes }: HomeProps) => {
 
 
