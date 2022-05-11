@@ -14,7 +14,7 @@ type Config = {
 
 const config : Config = {
     projectId: 'c8c16o8d',
-    dataset: 'prduction',
+    dataset: 'production',
     apiVersion: '2021-03-25',
     useCdn: false,
 }
