@@ -4,34 +4,37 @@ import { sanityClient, urlFor, usePreviewSubscription, PortableText } from "../.
 import { ParsedUrlQuery } from 'querystring'
 
 
-const recipesQuery: string = `*[_type == "recipe" && slug.current == $slug][0]{
+const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
     _id,
     name,
     slug,
-    mainImage{
-        assets->{
-            _id,
-            url
-        }
-    },
+    mainImage,
     ingredient[]{
-        unit,
-        wholeNumber,
-        fraction,
-        ingredient->{
-            name
-        }
+      _key,
+      unit,
+      wholeNumber,
+      fraction,
+      ingredient->{
+        name
+      }
     },
-    instruction
-}`;
+    instructions,
+    likes
+  }`;
 
 interface Params extends ParsedUrlQuery {
-    slug: string
-}
+    slug: string;
+};
+
+type OneRecipe = {
+    recipe: Recipe;
+};
 
 
-export default function oneRecipe() {
-    return 
+export const oneRecipe = ({recipe}: OneRecipe) => {
+    return (
+        <div></div>
+    )
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -55,9 +58,9 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
 
     const { slug } = params as Params;
     
-    const recipe : Recipe = await sanityClient.fetch(recipesQuery, {slug})
+    const recipe : Recipe = await sanityClient.fetch(recipeQuery, {slug})
 
     return {
-        props: { data: {recipe}}
+        props: { recipe}
     }
 }

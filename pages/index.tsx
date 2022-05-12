@@ -14,7 +14,7 @@ export type Recipe = {
 
 }
 
-type HomeProps = {
+type Props = {
   recipes: Recipe[]
 }
 
@@ -25,7 +25,7 @@ const recipesQuery: string = `*[_type == "recipe"]{
   mainImage
 }`;
 
-const Home = ({ recipes }: HomeProps) => {
+const Home = ({ recipes }: Props) => {
 
 
   return (
