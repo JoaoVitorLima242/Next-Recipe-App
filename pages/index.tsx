@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from "next/head"
 import {sanityClient, urlFor} from "../lib/sanity";
 
-type Recipe = {
+export type Recipe = {
   _id: string,
   mainImage: {
     _type: string,

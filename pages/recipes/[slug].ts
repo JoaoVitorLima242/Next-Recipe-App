@@ -1,5 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import { Recipe } from "../index";
 import { sanityClient, urlFor, usePreviewSubscription, PortableText } from "../../lib/sanity";
+import { ParsedUrlQuery } from 'querystring'
+
 
 const recipesQuery: string = `*[_type == "recipe" && slug.current == $slug][0]{
     _id,
@@ -22,22 +25,39 @@ const recipesQuery: string = `*[_type == "recipe" && slug.current == $slug][0]{
     instruction
 }`;
 
-export default function oneRecipe() {
+interface Params extends ParsedUrlQuery {
+    slug: string
+}
 
+
+export default function oneRecipe() {
+    return 
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+
+    const paths = await sanityClient.fetch(
+        `*[_type == 'recipe' && defined(slug.current)]{
+            'params': {
+                'slug': slug.current
+            }
+        }`
+    ) 
     
     return {
-        paths:[],
-        fallback: false,
+        paths,
+        fallback: true,
     }
 }
   
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async ({params}) => {
+
+    const { slug } = params as Params;
+    
+    const recipe : Recipe = await sanityClient.fetch(recipesQuery, {slug})
 
     return {
-        props: {}
+        props: { data: {recipe}}
     }
 }
