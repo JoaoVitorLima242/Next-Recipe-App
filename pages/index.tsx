@@ -56,7 +56,7 @@ const Home = ({ recipes }: HomeProps) => {
 
 
 export const getStaticProps : GetStaticProps = async () => {
-  const recipes = await sanityClient.fetch(recipesQuery);
+  const recipes : Recipe = await sanityClient.fetch(recipesQuery);
 
   return {
     props: {recipes},
