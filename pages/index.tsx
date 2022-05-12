@@ -10,8 +10,19 @@ export type Recipe = {
     asset: {_rel: string, _type: string}
   },
     name: string,
-    slug: { _type: string, current: string }
+    slug: { _type: string, current: string },
+    ingredient: Ingredient[],
+    instruction,
+    likes
 
+}
+
+export type Ingredient = {
+  _key: string,
+  unit: string,
+  wholeNumber: number,
+  fraction: string,
+  ingredient: {name: string},
 }
 
 type Props = {
