@@ -19,6 +19,8 @@ const config : Config = {
     useCdn: false,
 }
 
+// Sanity has by default type any in funcs and props.
+
 export const sanityClient = createClient(config);
 
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);

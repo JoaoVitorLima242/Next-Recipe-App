@@ -58,8 +58,6 @@ const Home = ({ recipes }: HomeProps) => {
 export const getStaticProps : GetStaticProps = async () => {
   const recipes = await sanityClient.fetch(recipesQuery);
 
-  console.log(recipes)
-
   return {
     props: {recipes},
   }
