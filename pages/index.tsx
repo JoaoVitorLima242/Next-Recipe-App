@@ -12,9 +12,8 @@ export type Recipe = {
     name: string,
     slug: { _type: string, current: string },
     ingredient: Ingredient[],
-    instruction,
-    likes
-
+    instruction?: Instruction[]
+    likes: number
 }
 
 export type Ingredient = {
@@ -24,6 +23,16 @@ export type Ingredient = {
   fraction: string,
   ingredient: {name: string},
 }
+
+export type Instruction = {
+  _key: string;
+  _type: string;
+  children: {_key: string, _type: string}[],
+  markDefs?: {}[],
+  style: string;
+}
+
+
 
 type Props = {
   recipes: Recipe[]

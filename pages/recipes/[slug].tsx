@@ -34,48 +34,27 @@ type OneRecipe = {
 export default function oneRecipe ({recipe}: OneRecipe) {
     return (
         <article className="recipe">
-      <h1>{recipe.name}</h1>
+        <h1>{recipe.name}</h1>
+        {/* the content for the recipe */}
+        <main className="content">
+            <img src={urlFor(recipe?.mainImage).url()} />
 
-      {/* likes */}
-      <button className="like-button" onClick={addLike}>
-        {likes}{" "}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-          />
-        </svg>
-      </button>
+            <div className="breakdown">
+            <ul className="ingredients">
+                {recipe.ingredient?.map((ingredient) => (
+                <li key={ingredient._key} className="ingredient">
+                    {ingredient?.wholeNumber}
+                    {ingredient?.fraction} {ingredient?.unit}
+                    <br />
+                    {ingredient?.ingredient?.name}
+                </li>
+                ))}
+            </ul>
 
-      {/* the content for the recipe */}
-      <main className="content">
-        <img src={urlFor(recipe?.mainImage).url()} />
-
-        <div className="breakdown">
-          <ul className="ingredients">
-            {recipe.ingredient?.map((ingredient) => (
-              <li key={ingredient._key} className="ingredient">
-                {ingredient?.wholeNumber}
-                {ingredient?.fraction} {ingredient?.unit}
-                <br />
-                {ingredient?.ingredient?.name}
-              </li>
-            ))}
-          </ul>
-          <PortableText
-            className="instructions"
-            blocks={recipe?.instructions}
-          />
-        </div>
-      </main>
-    </article>
+            <PortableText />
+            </div>
+        </main>
+        </article>
     )
 };
 
@@ -97,10 +76,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-
     const { slug } = params as Params;
     
     const recipe : Recipe = await sanityClient.fetch(recipeQuery, {slug})
+
+    console.log(recipe)
 
     return {
         props: { recipe}
