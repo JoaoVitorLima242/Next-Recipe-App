@@ -51,7 +51,7 @@ export default function oneRecipe ({recipe}: OneRecipe) {
                 ))}
             </ul>
 
-            <PortableText />
+            <PortableText blocks={recipe?.instructions}/>
             </div>
         </main>
         </article>
@@ -80,7 +80,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     
     const recipe : Recipe = await sanityClient.fetch(recipeQuery, {slug})
 
-    console.log(recipe)
+    console.log(recipe.instructions)
 
     return {
         props: { recipe}

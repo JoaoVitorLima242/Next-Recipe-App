@@ -12,7 +12,7 @@ export type Recipe = {
     name: string,
     slug: { _type: string, current: string },
     ingredient: Ingredient[],
-    instruction?: Instruction[]
+    instructions?: Instruction[]
     likes: number
 }
 
@@ -27,8 +27,8 @@ export type Ingredient = {
 export type Instruction = {
   _key: string;
   _type: string;
-  children: {_key: string, _type: string}[],
-  markDefs?: {}[],
+  children: {_key: string, _type: string, marks?: string[], text: string}[],
+  markDefs?: string[],
   style: string;
 }
 
